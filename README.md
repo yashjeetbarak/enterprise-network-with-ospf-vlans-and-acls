@@ -2,18 +2,69 @@
 
 ## Network Topology
 
-![Topology](<img width="959" height="418" alt="topology" src="https://github.com/user-attachments/assets/fefa271f-e589-4b76-849d-122b53cd15ae" />
-)
+![Network Topology](screenshots/topology.png)
+
+---
 
 ## Project Overview
 
-This project simulates a headquarters and two branch offices connected using OSPF dynamic routing. The network was designed to provide secure inter-site connectivity, departmental segmentation through VLANs, centralized DHCP services, SSH administration, and ACL-based protection for Finance resources.
+This project simulates a multi-site enterprise network consisting of a Headquarters location and two Branch Offices interconnected through OSPF dynamic routing.
 
-## Project Scenario
+The network was designed to provide:
 
-A growing organization required secure communication between headquarters and remote offices while maintaining departmental separation and protecting sensitive Finance systems from unauthorized access.
+- Secure inter-site communication
+- Departmental network segmentation using VLANs
+- Inter-VLAN communication using Router-on-a-Stick
+- Dynamic IP addressing with DHCP
+- Secure remote management using SSH
+- Access control using Extended ACLs
+- Scalable routing through OSPF Area 0
 
-## Technologies Used
+---
+
+## Business Scenario
+
+A growing organization required a secure and scalable network infrastructure connecting its Headquarters and Branch Offices.
+
+Each department needed isolated broadcast domains, centralized routing, automated IP addressing, and secure administrative access. Additionally, sensitive Finance resources needed protection from unauthorized departmental access.
+
+This solution was implemented using Cisco Packet Tracer and validated through routing, switching, security, and connectivity testing.
+
+---
+
+## Network Architecture
+
+### Headquarters
+
+| VLAN | Department | Network |
+|--------|------------|------------|
+| VLAN 10 | HR | 192.168.10.0/24 |
+| VLAN 20 | IT | 192.168.20.0/24 |
+
+### Branch Office 1
+
+| VLAN | Department | Network |
+|--------|------------|------------|
+| VLAN 30 | HR_B2 | 192.168.30.0/24 |
+| VLAN 40 | IT_B2 | 192.168.40.0/24 |
+
+### Branch Office 2
+
+| VLAN | Department | Network |
+|--------|------------|------------|
+| VLAN 50 | Finance | 192.168.50.0/24 |
+| VLAN 60 | IT_B3 | 192.168.60.0/24 |
+
+### WAN Links
+
+| Link | Network |
+|--------|------------|
+| HQ ↔ Branch 1 | 192.168.70.0/24 |
+| HQ ↔ Branch 2 | 192.168.80.0/24 |
+
+---
+
+## Technologies Implemented
 
 - OSPF Area 0
 - VLAN Segmentation
@@ -24,73 +75,152 @@ A growing organization required secure communication between headquarters and re
 - 802.1Q Trunking
 - Cisco Packet Tracer
 
-## Network Design
-
-| Site | VLAN | Department | Network |
-|------|------|------------|---------|
-| HQ | 10 | HR | 192.168.10.0/24 |
-| HQ | 20 | IT | 192.168.20.0/24 |
-| Branch 1 | 30 | HR_B2 | 192.168.30.0/24 |
-| Branch 1 | 40 | IT_B2 | 192.168.40.0/24 |
-| Branch 2 | 50 | Finance | 192.168.50.0/24 |
-| Branch 2 | 60 | IT_B3 | 192.168.60.0/24 |
+---
 
 ## Security Implementation
 
-A Finance-Protect ACL was configured to deny access from HR networks to the Finance VLAN while permitting legitimate business traffic.
+An Extended Access Control List (ACL) named **Finance-Protect** was implemented to secure the Finance VLAN.
 
-## Validation & Testing
+The ACL blocks access attempts from HR networks while allowing legitimate business traffic to continue across the enterprise network.
 
-### OSPF Neighbor Verification
-![OSPF](screenshots/ospf-neighbor-state.png)
+### ACL Verification
 
-### Routing Table Verification
-![Routing](screenshots/routing-table.png)
+![ACL Verification](screenshots/finance-acl.png)
 
-### DHCP Verification
-![DHCP](screenshots/dhcp-leases.png)
+---
 
-### VLAN Verification
+## OSPF Verification
+
+OSPF neighbor relationships were successfully established between Headquarters and both Branch Offices.
+
+![OSPF Verification](screenshots/ospf-neighbor-state.png)
+
+---
+
+## Routing Verification
+
+Routing tables confirm successful route advertisement and learning through OSPF.
+
+![Routing Table](screenshots/routing-table.png)
+
+---
+
+## DHCP Verification
+
+DHCP services automatically assigned addresses to end devices within the Headquarters VLANs.
+
+![DHCP Verification](screenshots/dhcp-leases.png)
+
+---
+
+## VLAN Verification
+
+### Headquarters VLANs
+
 ![HQ VLANs](screenshots/hq-vlans.png)
+
+### Branch Office 1 VLANs
 
 ![Branch 1 VLANs](screenshots/branch1-vlans.png)
 
+### Branch Office 2 VLANs
+
 ![Branch 2 VLANs](screenshots/branch2-vlans.png)
 
-### Trunk Verification
+---
+
+## Trunk Verification
+
+### Headquarters Trunk
+
 ![HQ Trunk](screenshots/trunk-status-hq.png)
 
-![Branch1 Trunk](screenshots/trunk-status-branch1.png)
+### Branch Office 1 Trunk
 
-![Branch2 Trunk](screenshots/trunk-status-branch2.png)
+![Branch 1 Trunk](screenshots/trunk-status-branch1.png)
 
-### SSH Verification
-![SSH](screenshots/ssh-login.png)
+### Branch Office 2 Trunk
 
-### Connectivity Testing
-![Connectivity](screenshots/connectivity-test.png)
+![Branch 2 Trunk](screenshots/trunk-status-branch2.png)
+
+---
+
+## Connectivity Validation
+
+End-to-end connectivity was successfully validated between remote sites.
+
+![Connectivity Test](screenshots/connectivity-test.png)
+
+---
+
+## SSH Remote Management
+
+SSH Version 2 was configured for secure administrative access to network devices.
+
+![SSH Verification](screenshots/ssh-login.png)
+
+---
 
 ## Challenges Encountered
 
-OSPF adjacency verification and route propagation validation required systematic troubleshooting using WAN connectivity checks, OSPF neighbor verification, and routing table analysis.
+### OSPF Neighbor Troubleshooting
 
-## Key Takeaways
+During implementation, OSPF adjacency verification required:
 
-- OSPF troubleshooting
-- Enterprise VLAN design
-- ACL implementation and validation
-- DHCP deployment
-- Secure SSH administration
-- Structured network troubleshooting
+- WAN connectivity validation
+- Interface verification
+- OSPF network statement verification
+- Route propagation validation
+
+### ACL Validation
+
+ACL placement and traffic flow testing were performed to ensure Finance resources remained protected while maintaining legitimate communication.
+
+---
+
+## Key Learning Outcomes
+
+- Multi-Site Enterprise Network Design
+- OSPF Dynamic Routing
+- VLAN Segmentation
+- Router-on-a-Stick Implementation
+- DHCP Deployment
+- Extended ACL Security
+- SSH Administration
+- Enterprise Troubleshooting Methodology
+
+---
 
 ## Repository Structure
 
-packet-tracer-file/
+```text
+enterprise-network-with-ospf-vlans-and-acls/
+│
+├── README.md
+│
+├── packet-tracer-file/
+│   └── HQ-Branch-Enterprise-Network.pkt
+│
+└── screenshots/
+    ├── topology.png
+    ├── ospf-neighbor-state.png
+    ├── routing-table.png
+    ├── dhcp-leases.png
+    ├── hq-vlans.png
+    ├── branch1-vlans.png
+    ├── branch2-vlans.png
+    ├── trunk-status-hq.png
+    ├── trunk-status-branch1.png
+    ├── trunk-status-branch2.png
+    ├── ssh-login.png
+    ├── finance-acl.png
+    └── connectivity-test.png
+```
 
-screenshots/
-
-README.md
+---
 
 ## Author
 
-Yash Barak
+**Yashjeet**
+
+CCNA | Networking | Cybersecurity | Cisco Packet Tracer Labs
