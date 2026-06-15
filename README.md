@@ -2,7 +2,8 @@
 
 ## Network Topology
 
-![Topology](screenshots/topology.png)
+![Topology](<img width="943" height="338" alt="topology" src="https://github.com/user-attachments/assets/82e847ed-5574-4783-a4cc-bd4dc64c2995" />
+)
 
 ## Project Overview
 
