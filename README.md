@@ -221,6 +221,12 @@ enterprise-network-with-ospf-vlans-and-acls/
 
 ## Author
 
-**Yashjeet**
+**Yashjeet Barak**
+
+CCNA Candidate | Networking | Cybersecurity
+
+GitHub: https://github.com/yashjeetbarak
+
+This project was designed, implemented, validated, and documented using Cisco Packet Tracer as part of my networking and cybersecurity portfolio.
 
 CCNA | Networking | Cybersecurity | Cisco Packet Tracer Labs
