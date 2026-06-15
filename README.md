@@ -2,7 +2,7 @@
 
 ## Network Topology
 
-![Topology](<img width="943" height="338" alt="topology" src="https://github.com/user-attachments/assets/82e847ed-5574-4783-a4cc-bd4dc64c2995" />
+![Topology](<img width="959" height="418" alt="topology" src="https://github.com/user-attachments/assets/fefa271f-e589-4b76-849d-122b53cd15ae" />
 )
 
 ## Project Overview
